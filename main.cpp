@@ -105,4 +105,30 @@ int main() {
 
 }
 
+//扒出一个数各个位的方法
+ int n = 123456;
+
+
+4
+
+    int unitPlace = n / 1 % 10;
+
+
+5
+
+    int tenPlace = n / 10 % 10;
+
+
+6
+
+    int hundredPlace = n / 100 % 10;
+
+
+7
+
+    int thousandPlace = n / 1000 % 10;
+
+
+
+
 
