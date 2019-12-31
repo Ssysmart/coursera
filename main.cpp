@@ -130,5 +130,49 @@ int main() {
 
 
 
+输入
+输入一行字符串（字符串中可能有空格，请用cin.getline(s,counts)方法把一行字符串输入到字符数组s中，其中counts是s的最大长度，这道题里面可以直接写80。），字符串长度小于80个字符。
+
+输出
+输出一行，依次输出a,e,i,o,u在输入字符串中出现的次数，整数之间用空格分隔。
+
+#include <iostream>
+using namespace std;
+
+int numa = 0;
+int nume = 0;
+int numi = 0;
+int numo = 0;
+int numu = 0;
+
+
+int main() {
+
+	char s[80] = {0};
+	cin.getline(s, 80);
+
+	int i = 0;
+while(s[i]!=0){
+	switch(s[i])
+	{
+	case'a':
+	    numa++;i++;break;
+	case'e':
+		nume++;i++;break;
+	case'i':
+		numi++;i++;break;
+	case'o':
+		numo++;i++;break;
+	case'u':
+		numu++;i++;break;
+	default:
+		i++; break;
+	}
+}
+
+cout <<numa<<' '<<nume<<' '<<numi<<' '<<numo<<' '<<numu;
+
+}
+
 
 
