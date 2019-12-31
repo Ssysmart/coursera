@@ -176,3 +176,65 @@ cout <<numa<<' '<<nume<<' '<<numi<<' '<<numo<<' '<<numu;
 
 
 
+输入为两行，每行一个字符串，共两个字符串。（请用cin.getline(s,80)录入每行字符串）（每个字符串长度都小于80）
+
+输出
+如果第一个字符串比第二个字符串小，输出一个字符"<"
+
+如果第一个字符串比第二个字符串大，输出一个字符">"
+
+如果两个字符串相等，输出一个字符"="
+
+
+
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+
+
+int main() {
+
+	char skr1[80]={0},skr2[80]={0};
+
+	cin.getline(skr1,80);
+	cin.getline(skr2,80);
+
+int count1 = 0, count2 = 0;
+	for(int i = 80; i>=0; i--){
+		if(skr1[i] != 0){
+			count1++;
+		}
+	}
+
+	for(int j = 80; j>=0; j--){
+			if(skr2[j] != 0){
+				count2++;
+			}
+		}
+
+
+	for(int i = 0; i < count1; i++){
+		if(96<skr1[i]&&skr1[i]<123)
+			skr1[i] -= 32;
+	}
+
+	for(int j = 0; j < count2; j++){
+		if(96<skr2[j]&&skr2[j]<123)
+			skr2[j]-=32;
+	}
+
+
+int test=strcmp(skr1, skr2);
+
+if(test > 0)
+	cout<<'>';
+else if (test < 0)
+	cout<<'<';
+else
+	cout << '=';
+
+}
+
+
