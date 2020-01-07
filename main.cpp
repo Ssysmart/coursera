@@ -238,3 +238,65 @@ else
 }
 
 
+
+描述
+
+一个以'.'结尾的简单英文句子，单词之间用空格分隔，没有缩写形式和其它特殊形式
+
+
+输入
+
+一个以'.'结尾的简单英文句子（长度不超过500），单词之间用空格分隔，没有缩写形式和其它特殊形式
+
+
+输出
+
+该句子中最长的单词。如果多于一个，则输出第一个
+
+
+#include <iostream>
+#include <string.h>
+using namespace std;
+int len = 0;
+
+int main() {
+
+char s[500] = {0};
+int last;//用来记录最长单词最后一个字母的下标；
+int maxlen =0 ; //记录最长单词长度；
+int temlen = 0; //记录当前单词的长度;
+
+cin.getline(s, 500);
+
+for(int i = 0; s[i]!='\0'; i++){
+	if(s[i] == '.'){
+		if(maxlen < temlen)
+		{
+			maxlen = temlen;
+			temlen = 0;
+			last = i;
+		}
+		else
+			break;
+	}
+	else if(s[i] == ' '){
+		if(maxlen < temlen){
+			maxlen = temlen;
+			temlen = 0;
+			last = i;
+		}
+		else
+			temlen = 0;
+	}
+	else
+	{
+		temlen ++;
+	}
+}
+
+for(int i = last - maxlen; i < last; i++)
+	cout<<s[i];
+}
+
+
+
