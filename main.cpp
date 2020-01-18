@@ -612,5 +612,130 @@ return 0;
 
 
 
+描述
+有一个小型的报账系统，它有如下功能：
+
+（1）统计每个人所报发票的总钱数
+
+（2）统计每类发票的总钱数
+
+将此系统简化为如下：假设发票类别共有A、B、C三种;一共有三个人，ID分别为1、2、3。
+
+输入
+系统输入包含三行，每行第一个数为人员ID（整型，1或2或3），第二个数为发票总张数(张数不超过100)，之后是多个发票类别（字符型，A或B或C）和相应发票金额（单进度浮点型,不超过1000.0）。
+
+输出
+输出包含六行，前三行为每人（按ID由小到大输出）所报发票总钱数（保留两位小数），后三行为每类发票的总钱数（保留两位小数）。
+
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+int Id;
+float amountOfA1 = 0;
+float amountOfB1 = 0;
+float amountOfC1 = 0;
+float amountOfA2 = 0;
+float amountOfB2 = 0;
+float amountOfC2 = 0;
+float amountOfA3 = 0;
+float amountOfB3 = 0;
+float amountOfC3 = 0;
+float total_1 = 0;
+float total_2 = 0;
+float total_3 = 0;
+
+int main() {
+
+	for(int i = 1; i<4;i++){
+		cin>> Id;
+		if(Id == 1){
+			int n;
+			cin>>n;
+			for(int i = 0; i<n;i++){
+				char a;
+				cin>>a;
+				if(a == 'A'){
+					float amount;
+					cin>>amount;
+					amountOfA1 += amount; total_1 +=amount;
+				}
+				if(a == 'B'){
+					float amount;
+					cin>>amount;
+					amountOfB1 += amount; total_1 +=amount;
+				}
+				if(a == 'C'){
+					float amount;
+					cin>>amount;
+					amountOfC1 += amount; total_1 +=amount;
+				}
+			}
+		}
+		if(Id == 2){
+			int n;
+			cin>>n;
+			for(int i = 0; i<n;i++){
+			   char a;
+			   cin>>a;
+			   if(a == 'A'){
+				  float amount;
+				  cin>>amount;
+				  amountOfA2 += amount; total_2 +=amount;
+					}
+			   if(a == 'B'){
+				  float amount;
+				  cin>>amount;
+				  amountOfB2 += amount; total_2 +=amount;
+					}
+			   if(a == 'C'){
+				  float amount;
+				  cin>>amount;
+				  amountOfC2 += amount; total_2 +=amount;
+				}
+		}
+
+	}
+		if(Id == 3){
+			int n;
+			cin>>n;
+			for(int i = 0; i<n;i++){
+		    char a;
+		    cin>>a;
+		    if(a == 'A'){
+			   float amount;
+			   cin>>amount;
+			   amountOfA3 += amount;total_3 +=amount;
+						}
+		    if(a == 'B'){
+			   float amount;
+			   cin>>amount;
+			   amountOfB3 += amount;total_3 +=amount;
+						}
+		    if(a == 'C'){
+			   float amount;
+			   cin>>amount;
+			   amountOfC3 += amount;total_3 +=amount;
+					}
+				}
+		}
+
+
+  }
+        float amountA, amountB, amountC;
+        amountA = amountOfA1 + amountOfA2 +amountOfA3;
+        amountB = amountOfB1 + amountOfB2 +amountOfB3;
+        amountC = amountOfC1 + amountOfC2 +amountOfC3;
+	    cout<<'1'<<' '<<setprecision(2)<<fixed<<total_1<<endl;
+		cout<<'2'<<' '<<setprecision(2)<<fixed<<total_2<<endl;
+		cout<<'3'<<' '<<setprecision(2)<<fixed<<total_3<<endl;
+		cout<<'A'<<' ' << setprecision(2)<<fixed<< amountA <<endl;
+		cout<<'B'<<' ' << setprecision(2)<<fixed<< amountB <<endl;
+		cout<<'C'<<' ' << setprecision(2)<<fixed<< amountC <<endl;
+	return 0;
+}
+
+
+
 
 
