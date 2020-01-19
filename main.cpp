@@ -736,6 +736,87 @@ int main() {
 }
 
 
+描述
+甲壳虫的《A day in the life》和《Tomorrow never knows》脍炙人口，如果告诉你a day in the life,真的会是tomorrow never knows?相信学了计概之后这个不会是难题，现在就来实现吧。
 
+读入一个格式为yyyy-mm-dd的日期（即年－月－日），输出这个日期下一天的日期。可以假定输入的日期不早于1600-01-01，也不晚于2999-12-30。
+
+输入
+输入仅一行，格式为yyyy-mm-dd的日期。
+
+输出
+输出也仅一行，格式为yyyy-mm-dd的日期
+
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+int year,month,day;
+int initial_month;
+
+bool bigorsmall (int a){
+	if(a == 1||a==3|| a==5||a==7||a==8||a==10||a==12){
+	   return 1;
+	}
+	else if (a==4|| a==6||a==9||a==11)
+	   return 0;
+}
+
+int main() {
+    char m , n;
+	cin>>year>>m>>month>>n>>day;
+
+
+	bool leapyear = (year%100 == 0&&year%400 == 0)||(year % 4 == 0&&year %100!=0);
+int initial_month =month;
+	if(leapyear&&month == 2){
+		if(day == 29){
+			day =1; month =3;
+		}
+		if(day < 29&&month ==2){
+			day+=1;}
+	}
+	else if(leapyear == 0&&month ==2){
+		if(day ==28){
+			day =1; month =3;
+		}
+		if(day <= 28&&month == 2){
+			day+=1;}
+
+	}
+
+
+if(initial_month==month&&month!=2&&month>=1){
+    if(bigorsmall(month)){
+    	if(day==31&&month==12){
+    	   day=1;month=1;year+=1;
+    	}
+    	else if(day==31){
+    		day =1; month+=1;
+    	}
+    	else if(day < 31)
+    		day +=1;
+    }
+    else{
+    	if(day==30&&month == 12){
+    		day=1;month=1;year+=1;
+    	}
+    	else if(day ==30){
+    		day =1; month+=1;
+    	}
+    	else if(day < 31)
+    		day +=1;
+    }
+}
+
+    cout<<year<<'-'<<setw(2)<<setfill('0')<<month<<'-'<<setw(2)<<setfill('0')<<day<<endl;
+
+
+
+
+
+
+	return 0;
+}
 
 
