@@ -903,3 +903,75 @@ int main() {
 	return 0;
 }
 
+描述
+
+输入一个句子（一行），将句子中的每一个单词翻转后输出。
+
+
+输入
+
+只有一行，为一个字符串，不超过500个字符。单词之间以空格隔开。所谓单词指的是所有不包含空格的连续的字符。
+
+这道题请用cin.getline输入一行后再逐个单词递归处理。
+
+输出
+
+翻转每一个单词后的字符串，单词之间的空格需与原文一致。
+
+
+#include <iostream>
+#include <iomanip>
+#include <string.h>
+using namespace std;
+char temp[500];
+int count;
+int b = 0;
+
+void reverse(int start, int num,char a[]){
+
+	if(start == num -1){
+		cout << a[start];
+	}
+	else{
+		reverse(start+1,num,a);
+	    cout<<a[start];
+	}
+
+}
+
+
+int main() {
+
+	char m[500];
+	cin.getline(m,500);
+
+	int number = 0;
+	for(int i = 0; m[i]!='\0';i++){
+		number ++;
+		}
+
+
+   m[number] = ' '; m[number+1] = '\0';
+
+
+
+	for(int i = 0; m[i]!='\0';i++){
+		if(m[i]!=' '&&m[i+1]!=' '){
+			temp[count] = m[i]; count++;
+		}
+		else if(m[i] != ' ' && m[i+1] == ' '){
+			temp[count]= m[i]; count++;
+			reverse(0,count,temp);
+			count = 0;
+		}
+		else if(m[i]==' '&& m[i+1]=='\0'){
+			m[i] = '\0';
+		}
+		else if (m[i] == ' '){
+			cout<<' ';
+		}
+	}
+
+	return 0;
+}
+
