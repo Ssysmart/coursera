@@ -1240,3 +1240,84 @@ int main()
 
 
 
+
+描述
+某个科室的病房分为重症和普通，只有当病人的疾病严重程度超过了入住重症病房的最低严重值，才可以安排入住重症病房。
+
+现在要求设计一个程序，给病人安排好病房。疾病的严重程度用0到10来表示，0表示小毛病，10表示非常严重。
+
+输入
+第一行输入病人的个数m(m < 50)，以及安排住入重症病房的最低严重值a
+
+紧接着m行，每行表示病人编号（三个位，用0补齐）及其疾病的严重程度（浮点数，1位小数）。
+
+每个病人的疾病严重程度都不一样。
+
+输出
+要求按照病人的严重程度输出住在重症病房里的病人的编号
+
+注意：
+
+如果当前所有病人的严重程度并不满足住在重症病房里，则输出“None.”（不包括引号）
+
+#include <iostream>
+#include <cstring>
+#include <iomanip>
+using namespace std;
+int id[101]= {0};
+float s[101] = {0};
+
+int main()
+{
+
+int *p1 = id;
+float *p2 = s;
+int num = 0;
+float n;int m;
+  cin>>m>>n;//m是总的样本数，n是最低严重值；
+
+  for(int i = 0; i<m; i++){
+	  int ID;float state;
+	  cin>>ID>>state;
+	  if(state >n){
+		  *p1 =ID;
+		  *p2 = state;
+		  p1++;p2++;
+		  num++;
+	  }
+  }
+
+  p1=id;p2 =s;
+
+    if(num == 0){
+  	  cout<<"None."<<endl;
+    }
+    else{
+  	  for(int i = 0; i<num;i++){
+  		 for(int j = 0; j<num-1-i;j++){
+  			 if(s[j] < s[j+1]){
+  				 float temp1;
+  				 temp1 = s[j];
+  				 s[j] = s[j+1];
+  				 s[j+1] = temp1;
+  				 int temp2;
+  				 temp2 = id[j];
+  				 id[j] = id[j+1];
+  				 id[j+1] = temp2;
+
+  			 }
+  		 }
+  	  }
+    }
+  if(num != 0){
+    for(int i =0; i<num;i++){
+   	   cout<<setfill('0')<<setw(3)<<id[i]<<' '<<fixed<<setprecision(1)<<s[i]<<endl;
+      }
+  }
+
+
+
+    return 0;
+}
+
+
