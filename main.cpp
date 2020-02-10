@@ -1382,5 +1382,102 @@ int main()
 }
 
 
+描述
+输入一串长度不超过500个符号的字符串，输出在串中出现第2多的英语字母(大小写字母认为相同)和次数（如果串中有其它符号，则忽略不考虑）。如果有多个字母的次数都是第2多，则按串中字母出现的顺序输出第1个。
+
+例 ab&dcAab&c9defgb
+
+这里，a 和 b都出现3次，c和d都出现2次，e、f 和 g 各出现1次，其中的符号&和9均忽略不考虑。因此，出现第2多的应该是 c 和 d，但是 d 开始出现的位置在 c 的前面，因此，输出为
+
+D+d:2
+
+(假定在字符串中，次数第2多的字母总存在)
+
+输入
+一个字符串
+
+输出
+大写字母+小写字母:个数
+#include <iostream>
+#include <cstring>
+#include <iomanip>
+using namespace std;
+char a[500] = {};
+struct str{
+	char alpha[26]={'A', 'B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+	int count[26] ={0};
+};
+
+
+
+int main()
+{
+
+	str string;
+	cin.getline(a,500);
+
+	for(int i = 0; a[i]!='\0';i++){
+		if((97<=a[i]&&a[i]<=122)||(a[i]>=65&&a[i]<=90)){
+			for(int j = 0; j<25;j++){
+				if(toupper(a[i]) == string.alpha[j]){
+					string.count[j] +=1;
+				}
+			}
+		}
+		else
+			continue;
+	}
+
+
+	int index = 0;
+	int Max = 0;
+
+
+
+    	for(int j = 0; j<26;j++){
+    		if(string.count[j]>Max){
+    			Max = string.count[j];
+    			index = j;
+    		}
+    	}//得到当前数组的最大的那个数
+
+        int id[26] = {0};
+    	bool second = 0;
+    	char secondMax[26] ={};
+    	int h = 0;
+    	while(Max>=0){
+    		Max--;
+    		for(int k = 0; k<26;k++){
+    		if(string.count[k] == Max){
+    			secondMax[h] = string.alpha[k];
+    			id[h] = k;
+    			second =1;
+    			h++;
+    		}
+    	 }
+    		if(second == 1)
+    			break;
+    	}
+
+
+    	for(int i=0; a[i]!='\0';i++){
+    		for(int j = 0; j<26;j++){
+    			if(toupper(a[i]) == secondMax[j]){
+    				index = id[j];
+    				second = 0;
+    			    break;
+    			}
+    		}
+    		if(second == 0){
+    			break;
+    		}
+    	}
+
+    cout<<string.alpha[index]<<'+'<<char (tolower(string.alpha[index]))<<':'<<string.count[index]<<endl;
+
+    return 0;
+}
+
+
 
 
