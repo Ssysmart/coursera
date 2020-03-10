@@ -1566,5 +1566,168 @@ int main() {
     return 0;
 }
 
+魔兽世界 备战 
+#include <iostream>
+#include <iomanip>
+#include<cstring>
+#include <stdio.h>
+using namespace std;//魔兽世界备战：：什么乱七八糟的
+//五个类
+
+class Charactor {
+public:
+    char name[7];//dragon ninja iceman lion wolf
+    //函数名不是指针但是作为参数有贬为指针，但是他不能像指针那样赋值
+    int borntime;
+    int Charactor_life;
+    Charactor(const char* a, int b, int c,int &d) {
+        strcpy_s(name, a);
+        Charactor_life = b;
+        d-=b;
+        borntime = c;
+      
+    }
+};
+//2个结构体red和blue
+
+
+bool whether_stop(int a, int* b) {
+    for (int i = 0; i < 5; i++) {
+        if (a >= * b++) { return 1; }//继续制造
+    }
+    return 0;
+}
+
+struct s_life {
+    char species[5][7] = { "dragon","ninja","iceman","lion","wolf" };//输入时的顺序
+    int species_life[5];
+};
+
+int num_of_charactor(char(*a)[7], char(*b)[7], int array[]) {
+    for (int i = 0; i < 5; i++) {
+        if (**a == **(b + i)) { array[i] += 1; return array[i]; }       
+    }
+    
+}//匹配到对象就加1
+
+void Jump_or_not(char(*a)[7], int b, int* c, int& d) {
+    if (b < *c) {
+        //如果生命值小于此物种
+        for (int i = 0; i < 5; i++) {
+            if (d == 4) { 
+                if (b >= * c) { break; }
+                else{ c -= 4; d = 0; a -= 4; }
+            }
+            else {
+                if (b >= *c) { break; }
+                else { d++; c++; a++; }
+            }
+        }
+    }
+}
+int main() {
+   
+
+    int num_of_case;
+    cin >> num_of_case;
+    int case_n = 0;
+    while (num_of_case > 0) {
+        char red[5][7] = { "iceman","lion","wolf","ninja","dragon" };
+        int red_life[5] = { 0 };
+        int red_num_of_charactor[5] = { 0 };
+        //这里是关系到输出顺序
+        char blue[5][7] = { "lion","dragon","ninja","iceman","wolf" };
+        int blue_life[5] = { 0 };
+        int blue_num_of_charactor[5] = { 0 };
+
+        int red_ID = 0, blue_ID = 0;
+        int borntime = 0;
+        int life;
+        int red_total_life;
+        int blue_total_life;//大本营的生命值
+
+
+    s_life object;
+
+    //循环次数
+
+    cin >> life; red_total_life = life; blue_total_life = life;
+
+    for (int i = 0; i < 5; i++) {
+        cin >> object.species_life[i];//录入每种物种的生命值
+    }
+    
+    char(*c1)[7] = red;
+    char(*c2)[7] = blue;
+
+ 
+   
+;    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            if(**(c1+i)==**(object.species+j)) {
+                red_life[i] = object.species_life[j];
+            }
+        }
+    }
+    //犯了个错误，*号应该是只有指针指向一个元素的时候加*号是可以提取该元素的否则只是升级降级的作用；
+    
+
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 5; j++) {
+            if (**(object.species + j) == **(c2 + i)) {
+                blue_life[i] = object.species_life[j];
+            }
+        }
+    }
+
+    //把输出顺序调好
+
+     bool red_finish_or_not = 0;bool blue_finish_or_not = 0;
+     int red_i = 0, blue_i = 0;
+     printf("Case:%u\n", ++case_n);
+        while (1) {
+            int record = 0;//记录红蓝双方有没有生成士兵。
+            if (whether_stop(red_total_life, object.species_life) == 0 && red_finish_or_not == 0) { cout << setw(3) << setfill('0') << borntime << ' ' << "red headquarter stops making warriors" << endl; red_finish_or_not = 1; }
+            if (whether_stop(red_total_life, object.species_life)) {
+                Jump_or_not(c1, red_total_life, &red_life[red_i], (red_i));
+                c1 = &red[red_i];
+                Charactor* pred = new Charactor(*c1, red_life[red_i], borntime, red_total_life);
+                printf("%03d %s %s %d born with strength %d,%d %s in %s headquarter\n",
+                    pred->borntime, "red", pred->name, ++red_ID, pred->Charactor_life, num_of_charactor(c1, red, red_num_of_charactor), pred->name, "red");
+                if (**(c1++) == 'd') { c1 = red; }
+                delete pred;
+                record += 1;
+                if (red_i < 4) { red_i++; }
+                else { red_i = 0; }
+            }
+
+            if (whether_stop(blue_total_life, object.species_life) == 0 && blue_finish_or_not == 0) { cout << setw(3) << setfill('0') << borntime << ' ' << "blue headquarter stops making warriors" << endl; blue_finish_or_not = 1; }
+            if (whether_stop(blue_total_life, object.species_life)) {
+                Jump_or_not(c2, blue_total_life, &blue_life[blue_i], (blue_i));
+                c2 = &blue[blue_i];
+                Charactor* pblue = new Charactor(*c2, blue_life[blue_i], borntime, blue_total_life);
+                printf("%03d %s %s %d born with strength %d,%d %s in %s headquarter\n",
+                    pblue->borntime, "blue", pblue->name, ++blue_ID, pblue->Charactor_life, num_of_charactor(c2, blue, blue_num_of_charactor), pblue->name, "blue");
+                if (**(c2 ++) == 'w') { c2 = blue; }
+                delete pblue;
+                record += 1;
+                if (blue_i < 4) { blue_i++; }
+                else { blue_i = 0; }
+            }
+
+            if (record == 0) { break; }
+            borntime++;
+            
+        }
+        num_of_case--;
+    }
+
+    return 0;
+}
+
+
+
+
+
 
 
